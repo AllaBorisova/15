@@ -13,7 +13,7 @@ let bigStr = arrString.reduce("") {res, age in "\(res)\(age)" }
 bigStr
 
 
-//3
+//3 1 variant
 func inner(){
     print("ready")
 }
@@ -22,6 +22,15 @@ func timing(){
    // inner()
 }
 timing()
+
+
+
+//3 2 variant
+func timing2(test: () -> Void){
+   DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {inner()})
+}
+timing2(test: {})
+
 
 //4
 
