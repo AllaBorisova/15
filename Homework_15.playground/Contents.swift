@@ -1,52 +1,56 @@
 import Foundation
 
-let arrString: [String] = ["Bbb", "Fff", "Aaa"]
+//+1 Напишите своими словами что такое pure function
+//pure function - всегда возвращает один и тот же результат при одинаковых входных параметрах, которавя не влияет на данные извне
 
+let arrString: [String] = ["Bbb", "Fff", "Aaa"]
 let arrNumber: [Int] = [23, 11, 89]
-//1
+
+//+2 отсортируйте массив чисел по возрастанпию используя функцию sorted
 arrNumber.sorted(by: >)
+arrNumber
+
+//+3 переведите массив в чисел в массив строк с помощью функции map
 let arrSt = arrNumber.map {"\($0)"}
 arrSt
 
-//2
+//+4 переведите массив строк с именами людей в одну строку? содержащую все эти имена? с помощью функции reduce
 let bigStr = arrString.reduce("") {res, age in "\(res)\(age)" }
 bigStr
 
-
-//3 1 variant
+//+5 Напишите функцию которая принимает в себя функцию с типом (Void) -> Void которая будет вызвана с задержкой в 2 секунды
 func inner(){
     print("ready")
 }
-func timing(){
-    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {inner()})
-   // inner()
-}
-timing()
-
-
-
-//3 2 variant
 func timing2(test: () -> Void){
-   DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {inner()})
+    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {inner()})
 }
 timing2(test: {})
 
 
-//4
 
-func pr1(){
-    print("pr1")
-}
-func pr2(){
-    print("pr2")
-}
-func second(){
-    pr1()
-    pr2()
-}
+//6 напишите функцию которая принимает в себя две функции и возвращает функцию кторая при вызове выполните первые две функции
 
-func first(){
-    return second()
-}
+func second(a: Int, b: Int, pr1: (Int, Int) -> Int, pr2: (Int, Int) -> Int) -> Int {
+    
+    return pr1(a, b) + pr2(a, b)
 
-first()
+}
+let result = second(a:3,b:2,pr1: {(a: Int, b: Int) -> Int in
+    return a + b
+    
+},pr2: {(a: Int, b: Int) -> Int in
+    return a - b
+    
+})
+print(result)
+
+
+//7 напишите функцию которая сортирует массив по переданному алгоритму: принимает в себя массив чисел и функцию которая берет на вход два числа и возвращает Bool(должно ли первое число идти после второго) и возвращает массив отсортированный по этому алгоритму
+
+func sortArr(arr: [Int], action: (Int, Int) -> Bool) -> [Int]{
+ return arr
+}
+//print(sortArr(arr: [4,3,5], action: {(a: Int, b: Int) -> Bool in return {if (a<b) {return true} else {return false}}}))
+
+//+8 напишите своими словами что такое infix suffix prefix операторы
